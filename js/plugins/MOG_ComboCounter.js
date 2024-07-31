@@ -194,7 +194,7 @@ Game_System.prototype.clearComboSpriteData = function() {
 		this._comboSpriteB[i] = {};
 		this._comboSpriteN1[i] = [];
 		this._comboSpriteN2[i] = [];
-	};
+	}
 };
 
 //=============================================================================
@@ -211,7 +211,7 @@ Game_Action.prototype.apply = function(target) {
 		$gameTemp.combo_data[0][3] = true;
 	} else if (this.subject().isEnemy() && target.isActor() && !target.result().isHit()) {
 		$gameTemp.combo_data[1][3] = true;
-	};
+	}
 };
 
 //==============================
@@ -233,7 +233,7 @@ Game_Action.prototype.executeHpDamage = function(target, value) {
 				if ($gameTemp.combo_cancel) {
 					$gameTemp.combo_data[1][3] = true;	
 					$gameTemp.combo_data[1][4] = false;
-				};
+				}
 			}
 			else if (this.subject().isEnemy() && target.isActor()) {
 			    $gameTemp.combo_data[1][0] = true;
@@ -242,10 +242,10 @@ Game_Action.prototype.executeHpDamage = function(target, value) {
 				if ($gameTemp.combo_cancel) {				
 					$gameTemp.combo_data[0][3] = true;	
 					$gameTemp.combo_data[0][4] = false;
-				};
-			};
-		};
-	};
+				}
+			}
+		}
+	}
 };		
 	
 //=============================================================================
@@ -315,7 +315,7 @@ Scene_Base.prototype.createComboCounter = function() {
 		this._hitCounterSprite[i] = new HitCounterSprites(i);
 		this._hitCounterSprite[i].z = 140;
 		this._hudField.addChild(this._hitCounterSprite[i]);
-	};
+	}
 };
 
 //=============================================================================
@@ -328,7 +328,7 @@ Scene_Base.prototype.createComboCounter = function() {
 var _mog_comboCounter_sbattle_createSpriteset = Scene_Battle.prototype.createSpriteset;
 Scene_Battle.prototype.createSpriteset = function() {
 	_mog_comboCounter_sbattle_createSpriteset.call(this);
-	if (!this._hudField) {this.createHudField()};
+	if (!this._hudField) {this.createHudField()}
     this.createComboCounter();
 	this.sortMz();	
 };
@@ -338,7 +338,7 @@ Scene_Battle.prototype.createSpriteset = function() {
 //=============================================================================
 function HitCounterSprites() {
     this.initialize.apply(this, arguments);
-};
+}
 
 HitCounterSprites.prototype = Object.create(Sprite.prototype);
 HitCounterSprites.prototype.constructor = HitCounterSprites;
@@ -353,7 +353,7 @@ HitCounterSprites.prototype.initialize = function(type) {
     this.createLayout();
 	if ($gameSystem._comboSpriteN1[this._type].length > 0 && $gameTemp.combo_data[this._type][1] > 0) {
 		this.loadComboSpriteData()
-	};
+	}
 };
 
 //==============================
@@ -383,7 +383,7 @@ HitCounterSprites.prototype.setupPosition = function() {
 	    this.visible = String(Moghunter.combo_enemies) == "true" ? true : false;
         this.x = Moghunter.combo_posX2;
 	    this.y = Moghunter.combo_posY2; 			
-	};
+	}
 	var yf = 0;	
 	this._org = [this.x + xf,this.y + yf];
 };
@@ -421,20 +421,20 @@ HitCounterSprites.prototype.createLayout = function() {
 //==============================
 HitCounterSprites.prototype.update = function() {	
    Sprite.prototype.update.call(this);	
-   if ($gameTemp.combo_data[this._type][0]) {this.refresh_combo_sprite()};
+   if ($gameTemp.combo_data[this._type][0]) {this.refresh_combo_sprite()}
    this.updateOpacity();
    this.updateLayout();
    this.updateNumber1();
    this.updateNumber2();
    this.updatePosition();
-   if (this.needUpdateDuration()) {this.updateDuration()};
+   if (this.needUpdateDuration()) {this.updateDuration()}
 };
 
 //==============================
 // * Update position
 //==============================
 HitCounterSprites.prototype.updatePosition = function() {
-   if (this._shakeData[0] > 0) {this.updateShake()};
+   if (this._shakeData[0] > 0) {this.updateShake()}
    this.x = this._org[0] + this._shakeData[2];
    this.y = this._org[1];
 };
@@ -444,11 +444,11 @@ HitCounterSprites.prototype.updatePosition = function() {
 //==============================
 HitCounterSprites.prototype.updateShake = function() {
    this._shakeData[1]++
-   if (this._shakeData[1] < 1) {return};
+   if (this._shakeData[1] < 1) {return}
    this._shakeData[0]--;
    this._shakeData[1] = 0;
    this._shakeData[2] = Math.randomInt(6) - 3 
-   if (this._shakeData[0] <= 0) {this._shakeData = [0,0,0]};
+   if (this._shakeData[0] <= 0) {this._shakeData = [0,0,0]}
 };
 
 //==============================
@@ -459,7 +459,7 @@ HitCounterSprites.prototype.updateOpacity = function() {
       this.combo_sprite_a.opacity -= 10;
 	  this.combo_sprite_b.opacity -= 10;
 	  this.combo_sprite_data[3] += 1;
-   };   
+   }   
 };
 
 //==============================
@@ -481,9 +481,9 @@ HitCounterSprites.prototype.updateNumber1 = function() {
 	   this.combo_sprite_n1[i].y = this.combo_sprite_n1[i].org[1];
 	   if (this.combo_sprite_n1[i].scale.x > 1.00) {
 		   this.combo_sprite_n1[i].scale.x -= 0.1;
-	   this.combo_sprite_n1[i].scale.y = this.combo_sprite_n1[i].scale.x};
-	   if (this.combo_sprite_data[0] <= 0) { this.combo_sprite_n1[i].opacity -= 10};
-   };
+	   this.combo_sprite_n1[i].scale.y = this.combo_sprite_n1[i].scale.x}
+	   if (this.combo_sprite_data[0] <= 0) { this.combo_sprite_n1[i].opacity -= 10}
+   }
 };
 
 //==============================
@@ -493,15 +493,15 @@ HitCounterSprites.prototype.updateNumber2 = function() {
    for (var i = 0; i < this.combo_sprite_n2.length; i++) {
 	   this.combo_sprite_n2[i].x = this.combo_sprite_data[3] + this.combo_sprite_data[2][i]  + this.combo_sprite_n2[i].org[0];
 	   this.combo_sprite_n2[i].y = this.combo_sprite_n2[i].org[1];
-	   if (this.combo_sprite_data[0] <= 0) { this.combo_sprite_n2[i].opacity -= 10};
-   };
+	   if (this.combo_sprite_data[0] <= 0) { this.combo_sprite_n2[i].opacity -= 10}
+   }
 };
 
 //==============================
 // * Need Update Duration
 //==============================
 HitCounterSprites.prototype.needUpdateDuration = function() {	
-   if (this.combo_sprite_data[0] <= 0) {return false};
+   if (this.combo_sprite_data[0] <= 0) {return false}
    return true
 };
 
@@ -509,26 +509,26 @@ HitCounterSprites.prototype.needUpdateDuration = function() {
 // * Update Duration
 //==============================
 HitCounterSprites.prototype.updateDuration = function() {	
-   if (!$gameTemp.combo_data[this._type][4]) {this.combo_sprite_data[0] -= 1};
-   if ($gameTemp.combo_data[this._type][3]) {this.combo_sprite_data[0] = 0};
+   if (!$gameTemp.combo_data[this._type][4]) {this.combo_sprite_data[0] -= 1}
+   if ($gameTemp.combo_data[this._type][3]) {this.combo_sprite_data[0] = 0}
    if (this.combo_sprite_data[0] == 0) {
 	   $gameTemp.combo_data[this._type] = [false,0,0,false,false];
 	   $gameSystem.clearComboSpriteData();
-   };
+   }
 };
 
 //==============================
 // * Refresh Combo Sprite
 //==============================
 HitCounterSprites.prototype.refresh_combo_sprite = function() {
-	if (!this._numberImg1.isReady()) {return};
+	if (!this._numberImg1.isReady()) {return}
 	$gameTemp.combo_data[this._type][0] = false;
 	$gameTemp.combo_data[this._type][3] = false;
 	this.combo_sprite_data[0] = 90;
     this.combo_sprite_a.opacity = 255;
     this.combo_sprite_b.opacity = 255;
 	this.combo_sprite_data[3] = 0;	
-	if (this._shakeEffect) {this._shakeData[0] = 30};
+	if (this._shakeEffect) {this._shakeData[0] = 30}
 	this.refresh_combo_hit();
 	this.refresh_combo_damage();
 	$gameSystem.clearComboSpriteData();
@@ -541,7 +541,7 @@ HitCounterSprites.prototype.refresh_combo_hit = function() {
 	var w = this._numberImg1.width / 10;
 	var h = this._numberImg1.height;
 	var dmg_number = Math.abs($gameTemp.combo_data[this._type][1]).toString().split("");
-	for (var i = 0; i <  this.combo_sprite_n1.length; i++) {this.removeChild(this.combo_sprite_n1[i]);};
+	for (var i = 0; i <  this.combo_sprite_n1.length; i++) {this.removeChild(this.combo_sprite_n1[i]);}
     for (var i = 0; i <  dmg_number.length; i++) {
 		var n = Number(dmg_number[i]);
 		     this.combo_sprite_n1[i] = new Sprite(this._numberImg1);
@@ -555,7 +555,7 @@ HitCounterSprites.prototype.refresh_combo_hit = function() {
 			 this.combo_sprite_n1[i].y = Moghunter.combo_hit_number_y;
 			 this.combo_sprite_n1[i].org = [this.combo_sprite_n1[i].x,this.combo_sprite_n1[i].y];		 
 		     this.addChild(this.combo_sprite_n1[i]);
-	};
+	}
 };
 
 //==============================
@@ -565,7 +565,7 @@ HitCounterSprites.prototype.refresh_combo_damage = function() {
 	var w = this._numberImg2.width / 10;
 	var h = this._numberImg2.height;
 	var dmg_number =  Math.abs($gameTemp.combo_data[this._type][2]).toString().split("");
-	for (var i = 0; i <  this.combo_sprite_n2.length; i++) {this.removeChild(this.combo_sprite_n2[i]);};
+	for (var i = 0; i <  this.combo_sprite_n2.length; i++) {this.removeChild(this.combo_sprite_n2[i]);}
     for (var i = 0; i <  dmg_number.length; i++) {
 		var n = Number(dmg_number[i]);
 		     this.combo_sprite_n2[i] = new Sprite(this._numberImg2);
@@ -575,5 +575,5 @@ HitCounterSprites.prototype.refresh_combo_damage = function() {
 			 this.combo_sprite_n2[i].org = [this.combo_sprite_n2[i].x,this.combo_sprite_n2[i].y];
 			 this.combo_sprite_data[2][i] = i * w;
 		     this.addChild(this.combo_sprite_n2[i]);
-	};
+	}
 };

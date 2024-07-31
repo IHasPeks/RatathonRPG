@@ -615,7 +615,7 @@ PluginManager.registerCommand(pluginName, "Card Album", args => {
 });
 function tripleTriadHasCard(card_id) {
     return ($dataTripleTriad.self_tt_cards.includes(card_id) && $dataTripleTriad.all_cards.includes(card_id));
-};
+}
 
 function tripleTriadCardsOwned() {
     return ($dataTripleTriad.self_tt_cards.length + $dataTripleTriad.all_cards.length);
@@ -632,7 +632,7 @@ function remove_specific_card_tt(arr, card) {
             return;
         }
     }
-};
+}
 
 function Game_TripleTriad() {
     this.self_tt_cards = [];
@@ -645,7 +645,7 @@ function Game_TripleTriad() {
     this.rules = [];
     this.enemy_id = 0;
     this.push_triple_triad = false;
-};
+}
 var $dataTripleTriad = null;
 
 const tt_alias_createGameObjects = DataManager.createGameObjects;
@@ -738,17 +738,17 @@ Scene_TripleTriad.prototype.initialize_enemy_variables = function () {
         $dataTripleTriad.enemy_tt_reserve[$dataTripleTriad.enemy_id] = new Array();
         for (var c = 1; c < enemy_hand.length; c += 2) {
             $dataTripleTriad.enemy_tt_cards[$dataTripleTriad.enemy_id].push(parseInt(enemy_hand[c]));
-        };
+        }
         for (var c = 1; c < enemy_reserve.length; c += 2) {
             $dataTripleTriad.enemy_tt_reserve[$dataTripleTriad.enemy_id].push(parseInt(enemy_reserve[c]));
-        };
-    };
+        }
+    }
     if ($dataTripleTriad.enemy_tt_cards[$dataTripleTriad.enemy_id].length < 5) {
         var max = $dataTripleTriad.enemy_tt_cards[$dataTripleTriad.enemy_id].length;
         for (var c = 0; c < 5 - max; c++) {
             var get_random_card = Math.floor(Math.random() * $dataTripleTriad.enemy_tt_reserve[$dataTripleTriad.enemy_id].length)
             $dataTripleTriad.enemy_tt_cards[$dataTripleTriad.enemy_id].push($dataTripleTriad.enemy_tt_reserve[$dataTripleTriad.enemy_id][get_random_card]);
-        };
+        }
     }
 
     this.npc_cards_hand = JSON.parse(JSON.stringify($dataTripleTriad.enemy_tt_cards[$dataTripleTriad.enemy_id]));
@@ -756,7 +756,7 @@ Scene_TripleTriad.prototype.initialize_enemy_variables = function () {
         var max = this.npc_cards_hand.length;
         for (var c = 5; c < max; c++) {
             this.npc_cards_hand.pop();
-        };
+        }
     }
     this.suddenDeath = JSON.parse(this.enemy_configuration[$dataTripleTriad.enemy_id])['SuddenDeath'] == "true" ? true : false;
     this.plusRule = JSON.parse(this.enemy_configuration[$dataTripleTriad.enemy_id])['Plus'] == "true" ? true : false;
@@ -2100,7 +2100,7 @@ Scene_TripleTriad.prototype.end_game = function () {
                         $dataTripleTriad.board_state[0].push(this.board_state[x][y]);
                     else
                         $dataTripleTriad.board_state[1].push(this.board_state[x][y]);
-                };
+                }
 
             if (this.score == 5 && this.suddenDeath) {
                 var get_cards_flip = $dataTripleTriad.board_state;
@@ -2110,15 +2110,15 @@ Scene_TripleTriad.prototype.end_game = function () {
                     if (get_cards_flip[0][card] > 4) {
                         this.remove_specific_item(this.npc_cards_hand, copy_npc_cards_hand[get_cards_flip[0][card] - 5]);
                         this.player_cards_hand.push(copy_npc_cards_hand[get_cards_flip[0][card] - 5]);
-                    };
-                };
+                    }
+                }
                 for (var card = 0; card < get_cards_flip[1].length; card++) {
                     if (get_cards_flip[1][card] <= 4) {
                         this.remove_specific_item(this.player_cards_hand, copy_player_cards_hand[get_cards_flip[1][card]]);
                         this.npc_cards_hand.push(copy_player_cards_hand[get_cards_flip[1][card]]);
-                    };
+                    }
 
-                };
+                }
                 this.load_plugin_parameters();
                 // this.initialize_enemy_variables();
                 this.initialize_variables(true);
@@ -2134,11 +2134,11 @@ Scene_TripleTriad.prototype.end_game = function () {
             else {
                 $dataTripleTriad.score = this.score;
                 SceneManager.push(Scene_After_Match_TT);
-            };
+            }
 
 
-        };
-    };
+        }
+    }
 };
 
 //////////////////////////////// AUX FUNCTIONS ////////////////////////////////////
@@ -2666,7 +2666,7 @@ Scene_After_Match_TT.prototype.load_variables = function () {
         var max = this.npc_cards_hand.length;
         for (var c = 5; c < max; c++) {
             this.npc_cards_hand.pop();
-        };
+        }
     }
     this.phase = 0;
     this.cursor_correction_x = parseInt(this.aux_images['main_cursor_x']);
@@ -2994,15 +2994,15 @@ Scene_After_Match_TT.prototype.choose_card = function () {
                 if (get_cards_flip[0][card] > 4) {
                     this.remove_specific_item($dataTripleTriad.enemy_tt_cards, copy_npc_cards_hand[get_cards_flip[0][card] - 5]);
                     $dataTripleTriad.all_cards.push(copy_npc_cards_hand[get_cards_flip[0][card] - 5]);
-                };
-            };
+                }
+            }
             for (var card = 0; card < get_cards_flip[1].length; card++) {
                 if (get_cards_flip[1][card] <= 4) {
                     this.remove_specific_item($dataTripleTriad.self_tt_cards, copy_player_cards_hand[get_cards_flip[1][card]]);
                     $dataTripleTriad.enemy_tt_cards[$dataTripleTriad.enemy_id].push(copy_player_cards_hand[get_cards_flip[1][card]]);
-                };
+                }
 
-            };
+            }
             this.phase = 4;
         }
     }
@@ -3184,7 +3184,7 @@ function Scene_Album_TT() {
     this.add_single_back_image();
     this.create_cards();
     this.create_extra_buttons();
-};
+}
 
 Scene_Album_TT.prototype = Object.create(Scene_Base.prototype);
 Scene_Album_TT.prototype.constructor = Scene_Album_TT;
@@ -3358,7 +3358,7 @@ Scene_Album_TT.prototype.create_cards = function () {
     this._cards_player_1_A = new Array(5);
     for (var c = 0; c < $dataTripleTriad.self_tt_cards.length; c++) {
         this.add_single_card_image(this._cards_player_1_A, c, parseInt(this.image_list['Cards_Hand_X']) + c * parseInt(this.image_list['Distance']), parseInt(this.image_list['Cards_Hand_Y']), $dataTripleTriad.self_tt_cards[c])
-    };
+    }
 };
 //-----------------------------------------------------------------------------
 // Function : add_single_card_image - creates card single image
@@ -3604,7 +3604,7 @@ Scene_Album_TT.prototype.flip_x_card_b = function (cardA, cardB) {
 
 function Window_TripleTriad_CardList() {
     this.initialize.apply(this, arguments);
-};
+}
 
 Window_TripleTriad_CardList.prototype = Object.create(Window_Command.prototype);
 Window_TripleTriad_CardList.prototype.constructor = Window_TripleTriad_CardList;
@@ -3643,7 +3643,7 @@ Window_TripleTriad_CardList.prototype.processOk = function () {
 
 function Window_TripleTriad_CardDetails() {
     this.initialize.apply(this, arguments);
-};
+}
 
 Window_TripleTriad_CardDetails.prototype = Object.create(Window_Base.prototype);
 Window_TripleTriad_CardDetails.prototype.constructor = Window_TripleTriad_CardDetails;

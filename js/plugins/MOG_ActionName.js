@@ -105,14 +105,14 @@ BattleManager.startAction = function() {
 // * set Skill Name
 //==============================
 BattleManager.setSkillName = function() {
-    if (!this._subject.currentAction() || !this._subject.currentAction().item()) {return};
+    if (!this._subject.currentAction() || !this._subject.currentAction().item()) {return}
 	var item = this._subject.currentAction().item();
 	var notes = item.note.split(/[\r\n]+/);
 	var enableName = true;
     notes.forEach(function(note) {
-    if (note == "Disable Name" ) {enableName = false};
+    if (note == "Disable Name" ) {enableName = false}
 	},this);		
-	if (enableName) {$gameTemp._skillNameData = [true,item,true]};
+	if (enableName) {$gameTemp._skillNameData = [true,item,true]}
 };
 
 //==============================
@@ -163,7 +163,7 @@ Scene_Base.prototype.createActionName = function() {
 var _mog_actionName_sbattle_createSpriteset = Scene_Battle.prototype.createSpriteset;
 Scene_Battle.prototype.createSpriteset = function() {
 	_mog_actionName_sbattle_createSpriteset.call(this);
-	if (!this._hudField) {this.createHudField()};
+	if (!this._hudField) {this.createHudField()}
     this.createActionName();
 	this.sortMz();	
 };
@@ -173,7 +173,7 @@ Scene_Battle.prototype.createSpriteset = function() {
 //=============================================================================
 function SpriteSkillName() {
     this.initialize.apply(this, arguments);
-};
+}
 
 SpriteSkillName.prototype = Object.create(Sprite.prototype);
 SpriteSkillName.prototype.constructor = SpriteSkillName;
@@ -195,7 +195,7 @@ SpriteSkillName.prototype.initialize = function() {
 	this._wait = 0;
     if ($gameTemp._skillNameDuration[0] > 0 && $gameTemp._skillNameDuration[1]) {
 		$gameTemp._skillNameData[0] = true;	
-	};
+	}
 };
 
 //==============================
@@ -217,7 +217,7 @@ SpriteSkillName.prototype.item = function() {
 // * is Visible
 //==============================
 SpriteSkillName.prototype.isVisible = function() {
-	if (this._wait > 0) {return false};
+	if (this._wait > 0) {return false}
     return $gameTemp._skillNameData[2];
 };
 
@@ -242,7 +242,7 @@ SpriteSkillName.prototype.refreshSkillName = function() {
 	$gameTemp._skillNameData[0] = false;
 	this._name.bitmap.clear();
 	this._layout.opacity = 0;
-	if (!this.item()) {return};
+	if (!this.item()) {return}
 	var text = this.item().name;
 	var textsize = ((text.length * 7) + this._nameData[0]);
 	var wsize = (Math.min(Math.max(textsize,48),160));
@@ -259,8 +259,8 @@ SpriteSkillName.prototype.refreshSkillName = function() {
 		 } else {
 		     this._layout[i].setFrame(0,this._nameData[1] * 2,this._nameData[0],this._nameData[1]);
 			 this._layout[i].scale.x = wsize / this._nameData[0];
-		 };
-	};		
+		 }
+	}		
 	this._name.bitmap.drawText(this.item().name,0,0,160,32,"center")	
 	this._name.x = Moghunter.skillName_name_x;
 	this._wait = 4;
@@ -282,7 +282,7 @@ SpriteSkillName.prototype.createLayout = function() {
 		this._layout[i].opacity = 0;
 		this._layout[i].z = 20;
 		this.addChild(this._layout[i]);
-	};	
+	}	
 };
 
 //==============================
@@ -316,15 +316,15 @@ SpriteSkillName.prototype.createIcon = function() {
 // * Update
 //==============================
 SpriteSkillName.prototype.updateVisible = function() {
-	if (this._wait > 0) {this._wait--};
+	if (this._wait > 0) {this._wait--}
 	if (this.isVisible()) {
 	    this._layout[0].opacity += 20;
 	} else {
 	    this._layout[0].opacity -= 20;
-	};
+	}
 	for (var i = 1; i < this._layout.length; i++) {
 		this._layout[i].opacity = this._layout[0].opacity;
-	};
+	}
 	this._name.opacity = this._layout[0].opacity;
 	this._icon.opacity = this._layout[0].opacity;
 };
@@ -335,11 +335,11 @@ SpriteSkillName.prototype.updateVisible = function() {
 SpriteSkillName.prototype.update = function() {
     Sprite.prototype.update.call(this);	
     if (!this._nameData) {
-		if (this._layoutImg.isReady()) {this.getNameData()};
+		if (this._layoutImg.isReady()) {this.getNameData()}
 		return;
-	};
-	if ($gameTemp._skillNameData[0]) {this.refreshSkillName()};
-	if ($gameTemp._skillNameDuration[0] > 0) {$gameTemp._skillNameDuration[0]--};
+	}
+	if ($gameTemp._skillNameData[0]) {this.refreshSkillName()}
+	if ($gameTemp._skillNameDuration[0] > 0) {$gameTemp._skillNameDuration[0]--}
 	this.updateVisible();
 	this.visible = true;
 	this.visible = this._layout[0].y === 0 ? false : true;

@@ -61,7 +61,7 @@ Window_BattleLog.prototype.refresh = function() {
 // ♦ OVERWRITE ♦ Message Speed
 //==============================
 Window_BattleLog.prototype.messageSpeed = function() {
-	if (Imported.MOG_FlashDamage) {if ($gameTemp._flashDamage) {return 0}};
+	if (Imported.MOG_FlashDamage) {if ($gameTemp._flashDamage) {return 0}}
     return Moghunter.winLogSpeed;
 };
 
@@ -78,12 +78,12 @@ BattleManager.displayStartMessages = function() {
 		for (const name of $gameTroop.enemyNames()) {
 			$gameMessage.add(TextManager.emerge.format(name));
 		}
-	};
+	}
 	if (String(Moghunter.battlePreemptiveMessage) === "true") {
 		if (this._preemptive) {
 			$gameMessage.add(TextManager.preemptive.format($gameParty.name()));
 		} else if (this._surprise) {
 			$gameMessage.add(TextManager.surprise.format($gameParty.name()));
 		}
-	};
+	}
 };

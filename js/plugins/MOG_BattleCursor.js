@@ -291,7 +291,7 @@ Game_Temp.prototype.initialize = function() {
 const _mog_bCursor_game_party_addActor = Game_Party.prototype.addActor;
 Game_Party.prototype.addActor = function(actorId) {
 	_mog_bCursor_game_party_addActor.call(this,actorId);
-	if (this.inBattle()) {$gameTemp._mogBattleCursor.needRefresh1 = true};
+	if (this.inBattle()) {$gameTemp._mogBattleCursor.needRefresh1 = true}
 };
 
 //==============================
@@ -300,7 +300,7 @@ Game_Party.prototype.addActor = function(actorId) {
 const _mog_bCursor_game_party_removeActor = Game_Party.prototype.removeActor;
 Game_Party.prototype.removeActor = function(actorId) {
 	_mog_bCursor_game_party_removeActor.call(this,actorId);
-	if (this.inBattle()) {$gameTemp._mogBattleCursor.needRefresh1 = true};
+	if (this.inBattle()) {$gameTemp._mogBattleCursor.needRefresh1 = true}
 };
 
 //=============================================================================
@@ -330,8 +330,8 @@ Game_Battler.prototype.initBattleCursor = function() {
 // * notetags mg
 //==============================
 Game_Battler.prototype.notetags_mg = function() {
-	if (this.isEnemy()) {return this.enemy().note.split(/[\r\n]+/)};
-	if (this.isActor()) {return this.actor().note.split(/[\r\n]+/)};
+	if (this.isEnemy()) {return this.enemy().note.split(/[\r\n]+/)}
+	if (this.isActor()) {return this.actor().note.split(/[\r\n]+/)}
 };
 
 //==============================
@@ -343,7 +343,7 @@ Game_Battler.prototype.setupBattleCursorNote = function() {
 		 if (note_data[0].toLowerCase() == "battle cursor offset"){
 		     this._battleCursor.X_Offset = Number(note_data[1]);
 			 this._battleCursor.Y_Offset = Number(note_data[2]);
-		 }; 
+		 } 
 	},this);
 };
 
@@ -400,7 +400,7 @@ Game_Action.prototype.needsSelection = function() {
 const _mog_battleCursor_game_action_apply = Game_Action.prototype.apply;
 Game_Action.prototype.apply = function(target) {
 	_mog_battleCursor_game_action_apply.call(this,target);
-	if (target && target.isEnemy() && target.isDead()) {$gameTemp._mogBattleCursor.needRefresh2 = true};
+	if (target && target.isEnemy() && target.isDead()) {$gameTemp._mogBattleCursor.needRefresh2 = true}
 };
 
 //=============================================================================
@@ -414,7 +414,7 @@ const _mog_battleCursor_window_battleActor_initialize = Window_BattleActor.proto
 Window_BattleActor.prototype.initialize = function(rect) {
 	_mog_battleCursor_window_battleActor_initialize.call(this,rect);
 	this._bcursor_winVisble = String(Moghunter.bcursor_TargetWindow) == "true" ? true : false;
-	if (!$dataSystem.optSideView) {this._bcursor_winVisble = true};
+	if (!$dataSystem.optSideView) {this._bcursor_winVisble = true}
 	this._bcSo = (Graphics.height * 2);
 };
 
@@ -425,16 +425,16 @@ const _mog_battleCursor_window_battleactor_select = Window_BattleActor.prototype
 Window_BattleActor.prototype.select = function(index) {
 	  _mog_battleCursor_window_battleactor_select.call(this,index);
 	   if (this.battleCursorNeedSelectAllActors()) {
-		   this.battleCursorSelectAllActors()};	  
+		   this.battleCursorSelectAllActors()}	  
 };
 
 //==============================
 // * battleCursorNeedSelectAllActors
 //==============================
 Window_BattleActor.prototype.battleCursorNeedSelectAllActors = function() {
-   if ($gameTemp._mogBattleCursor.isForEveryone) {return true};
-   if ($gameTemp._mogBattleCursor.isForOpponent) {return false};
-   if (!$gameTemp._mogBattleCursor.isForAll) {return false};
+   if ($gameTemp._mogBattleCursor.isForEveryone) {return true}
+   if ($gameTemp._mogBattleCursor.isForOpponent) {return false}
+   if (!$gameTemp._mogBattleCursor.isForAll) {return false}
    return true;
 };
 
@@ -444,7 +444,7 @@ Window_BattleActor.prototype.battleCursorNeedSelectAllActors = function() {
 Window_BattleActor.prototype.battleCursorSelectAllActors = function() {
     for (const member of $gameParty.battleMembers()) {
 	     member.select();
-	};
+	}
 	this.setCursorAll(true);
 };
 
@@ -495,16 +495,16 @@ Window_BattleEnemy.prototype.initialize = function(rect) {
 const _mog_battleCursor_window_battleenemy_select = Window_BattleEnemy.prototype.select
 Window_BattleEnemy.prototype.select = function(index) {
     _mog_battleCursor_window_battleenemy_select.call(this,index);
-	if (this.battleCursorNeedSelectAllEnemies()) {this.battleCursorSelectAllEnemies()};	  
+	if (this.battleCursorNeedSelectAllEnemies()) {this.battleCursorSelectAllEnemies()}	  
 };
 
 //==============================
 // * battleCursorNeedSelectAllEnemies
 //==============================
 Window_BattleEnemy.prototype.battleCursorNeedSelectAllEnemies = function() {
-   if ($gameTemp._mogBattleCursor.isForEveryone) {return true};
-   if (!$gameTemp._mogBattleCursor.isForOpponent) {return false};
-   if (!$gameTemp._mogBattleCursor.isForAll) {return false};
+   if ($gameTemp._mogBattleCursor.isForEveryone) {return true}
+   if (!$gameTemp._mogBattleCursor.isForOpponent) {return false}
+   if (!$gameTemp._mogBattleCursor.isForAll) {return false}
    return true;
 };
 
@@ -514,7 +514,7 @@ Window_BattleEnemy.prototype.battleCursorNeedSelectAllEnemies = function() {
 Window_BattleEnemy.prototype.battleCursorSelectAllEnemies = function() {
     for (const member of $gameTroop.aliveMembers()) {
 	     member.select();
-	};
+	}
 	this.setCursorAll(true);
 };
 
@@ -557,7 +557,7 @@ Window_BattleEnemy.prototype.refreshCursorForAll = function() {
         this.setCursorRect(rect.x, rect.y, rect.width, rect.height);
     } else {
         this.setCursorRect(0, 0, 0, 0);
-    };
+    }
 	this._index = 0;
 };
 
@@ -566,7 +566,7 @@ Window_BattleEnemy.prototype.refreshCursorForAll = function() {
 //==============================
 const _mog_battleCursor_window_battleEnemy_cursorDown = Window_BattleEnemy.prototype.cursorDown;
 Window_BattleEnemy.prototype.cursorDown = function(wrap) {
-    if (!this._bcursor_winVisble) {this.inputIndex(1);return};
+    if (!this._bcursor_winVisble) {this.inputIndex(1);return}
 	_mog_battleCursor_window_battleEnemy_cursorDown.call(this,wrap);
 };
 
@@ -575,7 +575,7 @@ Window_BattleEnemy.prototype.cursorDown = function(wrap) {
 //==============================
 const _mog_battleCursor_window_battleEnemy_cursorUp = Window_BattleEnemy.prototype.cursorUp;
 Window_BattleEnemy.prototype.cursorUp = function(wrap) {
-    if (!this._bcursor_winVisble) {this.inputIndex(-1);return};
+    if (!this._bcursor_winVisble) {this.inputIndex(-1);return}
 	_mog_battleCursor_window_battleEnemy_cursorUp.call(this,wrap);
 };
 
@@ -584,7 +584,7 @@ Window_BattleEnemy.prototype.cursorUp = function(wrap) {
 //==============================
 const _mog_battleCursor_window_battleEnemy_cursorRight = Window_BattleEnemy.prototype.cursorRight;
 Window_BattleEnemy.prototype.cursorRight = function(wrap) {
-    if (!this._bcursor_winVisble) {this.inputIndex(1);return};
+    if (!this._bcursor_winVisble) {this.inputIndex(1);return}
 	_mog_battleCursor_window_battleEnemy_cursorRight.call(this,wrap);
 };
 
@@ -593,7 +593,7 @@ Window_BattleEnemy.prototype.cursorRight = function(wrap) {
 //==============================
 const _mog_battleCursor_window_battleEnemy_cursorLeft = Window_BattleEnemy.prototype.cursorLeft;
 Window_BattleEnemy.prototype.cursorLeft = function(wrap) {
-    if (!this._bcursor_winVisble) {this.inputIndex(-1);return};
+    if (!this._bcursor_winVisble) {this.inputIndex(-1);return}
 	_mog_battleCursor_window_battleEnemy_cursorLeft.call(this,wrap);
 };
 
@@ -608,8 +608,8 @@ Window_Selectable.prototype.inputIndex = function(value) {
     var index = this.index();
 	var maxValue = this.maxItems() - 1;
 	index += value;
-	if (index > maxValue) {index = 0};
-	if (index < 0) {index = maxValue};
+	if (index > maxValue) {index = 0}
+	if (index < 0) {index = maxValue}
 	this.smoothSelect(index)
 };
 
@@ -641,7 +641,7 @@ Spriteset_Battle.prototype.createSprtField2 = function() {
 const _mog_bCursor_spriteset_battle_createLowerLayer = Spriteset_Battle.prototype.createLowerLayer
 Spriteset_Battle.prototype.createLowerLayer = function() {
 	_mog_bCursor_spriteset_battle_createLowerLayer.call(this);
-    if (!this._sprtField2) {this.createSprtField2()};
+    if (!this._sprtField2) {this.createSprtField2()}
 	this.createBattleCursor();	  
 };
 
@@ -654,7 +654,7 @@ Spriteset_Battle.prototype.createBattleCursor = function() {
 		 const battlerSprite = new BattleCursorSprite(this,sprite);
 		 battlerSprite.z = 5;
 		 this._sprtField2.addChild(battlerSprite);
-	};
+	}
 };
 
 //=============================================================================
@@ -679,8 +679,8 @@ Scene_Battle.prototype.updateBattleCursor = function() {
 		if ($gameTemp._mogBattleCursor.slideTime == 0) {
 	        $gameTemp._mogBattleCursor.x = 0;
 		    $gameTemp._mogBattleCursor.y = 0;
-		};
-	};
+		}
+	}
     this.updateBattleCursorTargetWindow();
 	$gameTemp._mogBattleCursor.needRefresh1 = false;
 	$gameTemp._mogBattleCursor.needRefresh2 = false;	
@@ -693,22 +693,22 @@ Scene_Battle.prototype.updateBattleCursorTargetWindow= function() {
 	if ($gameTemp._mogBattleCursor.needRefresh1 && this._actorWindow.active) {
 		this._actorWindow.refresh();
 		this._actorWindow.select(0);
-	};
+	}
 	if ($gameTemp._mogBattleCursor.needRefresh2 && this._enemyWindow.active) {
 		const enemy = this._enemyWindow.enemy();
 		this._enemyWindow.refresh();
 		if (!enemy.isDead()) {
 			var checked = false;
 			for (var i = 0; i < $gameTroop.aliveMembers().length; i++) {	
-				 if ($gameTroop.aliveMembers()[i] == enemy) {this._enemyWindow.select(i);checked = true};
-			};
-			if (!checked) {this._enemyWindow.select(0)};
+				 if ($gameTroop.aliveMembers()[i] == enemy) {this._enemyWindow.select(i);checked = true}
+			}
+			if (!checked) {this._enemyWindow.select(0)}
 		} else {
 			this._enemyWindow.select(0);
-		};
-	};
-    if (this._enemyWindow && !this._enemyWindow._bcursor_winVisble) {this._enemyWindow.y = this._enemyWindow._bcSo};
-	if (this._actorWindow && !this._actorWindow._bcursor_winVisble) {this._actorWindow.y = this._actorWindow._bcSo};
+		}
+	}
+    if (this._enemyWindow && !this._enemyWindow._bcursor_winVisble) {this._enemyWindow.y = this._enemyWindow._bcSo}
+	if (this._actorWindow && !this._actorWindow._bcursor_winVisble) {this._actorWindow.y = this._actorWindow._bcSo}
 };
 
 //==============================
@@ -747,7 +747,7 @@ Scene_Battle.prototype.battleCursorOnSelectAction = function() {
 //=============================================================================
 function BattleCursorSprite() {
     this.initialize.apply(this, arguments);
-};
+}
 
 BattleCursorSprite.prototype = Object.create(Sprite.prototype);
 BattleCursorSprite.prototype.constructor = BattleCursorSprite;
@@ -786,7 +786,7 @@ BattleCursorSprite.prototype.initialize = function(spriteset,sprite) {
 	this.visible = false;
 	this.opacity = 0;
 	this._moveSpeed = (Math.min(Math.max(Moghunter.bcursor_moveSpeed,30),300));
-	if (String(Moghunter.bcursor_slide) != "true") {this._moveSpeed = 3000};
+	if (String(Moghunter.bcursor_slide) != "true") {this._moveSpeed = 3000}
 	this._xf = ((Graphics.width - Graphics.boxWidth) / 2);
 	this._yf = ((Graphics.height - Graphics.boxHeight) / 2);	
 };
@@ -825,7 +825,7 @@ BattleCursorSprite.prototype.updateAnime = function() {
 	if (this._anime.time1 > this._anime.time2) {
 		this._anime.time1 = 0;
 		this.refreshFrameAnimation();
-	};
+	}
 };
 
 //==============================
@@ -833,7 +833,7 @@ BattleCursorSprite.prototype.updateAnime = function() {
 //==============================
 BattleCursorSprite.prototype.refreshFrameAnimation = function() {
 	this._anime.index++;
-	if (this._anime.index > (this._anime.frameMax - 1)) {this._anime.index = 0};
+	if (this._anime.index > (this._anime.frameMax - 1)) {this._anime.index = 0}
 	const sx = this._anime.width * this._anime.index;
     this._cursorSprite.setFrame(sx, 0, this._anime.width, this._anime.height);
 };
@@ -870,7 +870,7 @@ BattleCursorSprite.prototype.createSprites = function() {
 	this._nameSprite.bitmap.fontBold = String(Moghunter.bcursor_fontBold) == "true" ? true : false;
 	this._nameSprite.bitmap.fontItalic = String(Moghunter.bcursor_fontItalic) == "true" ? true : false;
 	this.addChild(this._nameSprite);
-	if (this._battler) {this.refreshBattleCursor()};
+	if (this._battler) {this.refreshBattleCursor()}
 };
 
 //==============================
@@ -886,7 +886,7 @@ BattleCursorSprite.prototype.refreshBattler = function() {
 BattleCursorSprite.prototype.setBattler = function() {	 
      if (this._battlerSprite) {
 	     return this._battlerSprite._battler;
-	 };
+	 }
 	 return null;
 };
 
@@ -895,17 +895,17 @@ BattleCursorSprite.prototype.setBattler = function() {
 //==============================
 BattleCursorSprite.prototype.needRefresh = function() {
 	if (this._battlerSprite) {
-        if ($gameTemp._mogBattleCursor.needRefresh1) {return true};
-		if ($gameTemp._mogBattleCursor.needRefresh2) {return true};
-		if (this._battler != this._battlerSprite._battler) {return true};
+        if ($gameTemp._mogBattleCursor.needRefresh1) {return true}
+		if ($gameTemp._mogBattleCursor.needRefresh2) {return true}
+		if (this._battler != this._battlerSprite._battler) {return true}
 		if (this._battler && this._position.width == 0 && this._position.height == 0) {
 		   if (this._battlerSprite._mainSprite) { 
-			   if (this._battlerSprite._mainSprite.bitmap && this._battlerSprite._mainSprite.bitmap.isReady()) {return true};
+			   if (this._battlerSprite._mainSprite.bitmap && this._battlerSprite._mainSprite.bitmap.isReady()) {return true}
 		   } else {
-			   if (this._battlerSprite.bitmap && this._battlerSprite.bitmap.isReady()) {return true};
-		   };
-		};
-	};
+			   if (this._battlerSprite.bitmap && this._battlerSprite.bitmap.isReady()) {return true}
+		   }
+		}
+	}
     return false;
 };
 
@@ -919,7 +919,7 @@ BattleCursorSprite.prototype.refreshBattleCursor = function() {
 		this.refreshData();
 		this.refreshBitmap();
 		this.refreshName();
-	};
+	}
 };
 
 //==============================
@@ -934,7 +934,7 @@ BattleCursorSprite.prototype.refreshData = function() {
 	     this._align = this.getAlign(String(Moghunter.bcursor_alignActor));
 	  	 this._position.xOffset = Moghunter.bcursor_x_actor;
 		 this._position.yOffset = Moghunter.bcursor_y_actor;		 
-	 };
+	 }
 };
 
 //==============================
@@ -949,8 +949,8 @@ BattleCursorSprite.prototype.refreshBitmap = function() {
      } else {
 	    this._position.width = this.setCursorAlign(this._align);
 		this._position.height = this.setCursorAlign(1); 
-     };
-	 if (this._anime.enabled) {this.prepareAnimation()};
+     }
+	 if (this._anime.enabled) {this.prepareAnimation()}
 };
 
 //==============================
@@ -969,8 +969,8 @@ BattleCursorSprite.prototype.setCursorAlign = function(align) {
 				 return (this._battlerSprite._mainSprite.width / 2) - 5;
 		     } else {
 			     return this._battlerSprite._mainSprite.height - 12;
-			 };			 
-		 };
+			 }			 
+		 }
          if (this._battlerSprite.bitmap && this._battlerSprite.bitmap.isReady()) {
 			 if (align == 0) {
 				 return 0;
@@ -982,9 +982,9 @@ BattleCursorSprite.prototype.setCursorAlign = function(align) {
 				 return (this._battlerSprite.width / 2) - 10;				 
 		     } else {
 			     return this._battlerSprite.height - 24;
-			 };
-         };
-     };
+			 }
+         }
+     }
 	 return 0;
 };
 
@@ -992,7 +992,7 @@ BattleCursorSprite.prototype.setCursorAlign = function(align) {
 // * set Cursor Bitmap
 //==============================
 BattleCursorSprite.prototype.setCursorBitmap = function() {
-     if (this._battler.isEnemy()) {return this._cursorBitmap2};
+     if (this._battler.isEnemy()) {return this._cursorBitmap2}
 	 return this._cursorBitmap1;
 };
 
@@ -1014,13 +1014,13 @@ BattleCursorSprite.prototype.refreshName = function() {
 // * move Cursor
 //==============================
 BattleCursorSprite.prototype.moveCursor = function(value,real_value) {
-	if (value == real_value) {return value};
+	if (value == real_value) {return value}
 	var dnspeed = (5 + (Math.abs(value - real_value) / 10)) * (this.moveSpeed() / 100);
 	if (value > real_value) {value -= dnspeed;
-	    if (value < real_value) {value = real_value};}
+	    if (value < real_value) {value = real_value}}
     else if (value < real_value) {value  += dnspeed;
-    	if (value  > real_value) {value  = real_value};		
-    };
+    	if (value  > real_value) {value  = real_value}		
+    }
 	return Math.floor(value);
 };	
 
@@ -1028,7 +1028,7 @@ BattleCursorSprite.prototype.moveCursor = function(value,real_value) {
 // * posX
 //==============================
 BattleCursorSprite.prototype.posX = function() {
-   if (!this._battlerSprite) {return 0};
+   if (!this._battlerSprite) {return 0}
    return this._xf + this._position.xOffset + this._battlerSprite.x + this._effect.waveX + this._battler._battleCursor.X_Offset + this._position.width;   
 };
 
@@ -1036,7 +1036,7 @@ BattleCursorSprite.prototype.posX = function() {
 // * posY
 //==============================
 BattleCursorSprite.prototype.posY = function() {
-   if (!this._battlerSprite) {return 0};
+   if (!this._battlerSprite) {return 0}
    return this._yf + this._position.yOffset + this._battlerSprite.y + this._effect.waveY + this._battler._battleCursor.Y_Offset - this._position.height; 
 };
 
@@ -1049,7 +1049,7 @@ BattleCursorSprite.prototype.updateWaveEffect = function() {
 		this._effect.waveY = this.updateWaveMovement(this._effect.waveY);
 	} else {
 		this._effect.waveX = this.updateWaveMovement(this._effect.waveX);
-	};
+	}
 };
 
 //==============================
@@ -1060,15 +1060,15 @@ BattleCursorSprite.prototype.updateWaveMovement = function(value) {
 		if (this._effect.waveTime > 2) {
 			this._effect.waveTime = 0
 		    value++;
-			if (value >= 10) {this._effect.waveMode = 1	};
-		};
+			if (value >= 10) {this._effect.waveMode = 1	}
+		}
 	} else {
 		if (this._effect.waveTime > 2) {
 			this._effect.waveTime = 0
 		    value--;
-			if (value <= 0) {this._effect.waveMode = 0};
-		};		
-	};
+			if (value <= 0) {this._effect.waveMode = 0}
+		}		
+	}
 	return value
 };
 
@@ -1076,16 +1076,16 @@ BattleCursorSprite.prototype.updateWaveMovement = function(value) {
 // * isForAll
 //==============================
 BattleCursorSprite.prototype.isForAll = function() {
-   return $gameTemp._mogBattleCursor.isForAll;;
+   return $gameTemp._mogBattleCursor.isForAll;
 };
 
 //==============================
 // * isVisible
 //==============================
 BattleCursorSprite.prototype.isVisible = function() {
-	if (!this._battler) {return false};
-	if (this._battler.isHidden()) {return false};
-	if (this._battler.isEnemy() && this._battler.isDead()) {return false};
+	if (!this._battler) {return false}
+	if (this._battler.isHidden()) {return false}
+	if (this._battler.isEnemy() && this._battler.isDead()) {return false}
 	return this._battler.isSelected();
 };
 
@@ -1094,8 +1094,8 @@ BattleCursorSprite.prototype.isVisible = function() {
 //==============================
 BattleCursorSprite.prototype.updateBattleCursor = function() {
      this.visible = this.isVisible();
-	 if (this._effect.wave) {this.updateWaveEffect()};
-	 if (this._anime.enabled) {this.updateAnime()};
+	 if (this._effect.wave) {this.updateWaveEffect()}
+	 if (this._anime.enabled) {this.updateAnime()}
      this.updatePosition();
 };
 
@@ -1114,15 +1114,15 @@ BattleCursorSprite.prototype.updatePosition = function() {
        	 this.x = $gameTemp._mogBattleCursor.x;
 	     this.y = $gameTemp._mogBattleCursor.y;
 		 this.opacity = $gameTemp._mogBattleCursor.slideTime == 0 ? 0 : 255;
-	 };
+	 }
  };
 
 //==============================
 // * need Create Sprites
 //==============================
 BattleCursorSprite.prototype.needCreateSprites = function() {
-   if (this._cursorSprite) {return false};
-   if (!this._cursorBitmap1.isReady()) {return false};
+   if (this._cursorSprite) {return false}
+   if (!this._cursorBitmap1.isReady()) {return false}
    return true;
 };
 
@@ -1132,8 +1132,8 @@ BattleCursorSprite.prototype.needCreateSprites = function() {
 BattleCursorSprite.prototype.update = function() {
     Sprite.prototype.update.call(this);	
 	if (this.needCreateSprites()) {this.createSprites()}
-    if (this.needRefresh()) {this.refreshBattleCursor()};
-	if (this._battler) {this.updateBattleCursor()};
+    if (this.needRefresh()) {this.refreshBattleCursor()}
+	if (this._battler) {this.updateBattleCursor()}
 };
 
 })();

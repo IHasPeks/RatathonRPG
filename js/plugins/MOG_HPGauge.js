@@ -225,7 +225,7 @@ BattleManager.processDefeat = function() {
 var _mog_hpgauge_gbattlerbase_die = Game_BattlerBase.prototype.die;
 Game_BattlerBase.prototype.die = function() {
 	_mog_hpgauge_gbattlerbase_die.call(this);
-	if (this._enemyId && this.isEnemy()) {$gameSystem._hpGaugeEDef[this._enemyId] = true};
+	if (this._enemyId && this.isEnemy()) {$gameSystem._hpGaugeEDef[this._enemyId] = true}
 };
 
 //=============================================================================
@@ -246,13 +246,13 @@ Game_Battler.prototype.initMembers = function() {
 //==============================
 Game_Battler.prototype.checkHPGaugeNotes = function() {
 	this.notetags().forEach(function(note) {
-		if (note == "Hide HP") {this._ehpgauge[0] = false};
+		if (note == "Hide HP") {this._ehpgauge[0] = false}
          var note_data = note.split(': ')
 		 if (note_data[0].toLowerCase() == "hp gauge offset"){
 			 var par = note_data[1].split(':');
 		     this._ehpgauge[1] = Number(par[0]);
 			 this._ehpgauge[2] = Number(par[1]);
-		 };		
+		 }		
 	},this);
 };
 
@@ -260,8 +260,8 @@ Game_Battler.prototype.checkHPGaugeNotes = function() {
 // * Notetags
 //==============================
 Game_Battler.prototype.notetags = function() {
-	if (this.isEnemy()) {return this.enemy().note.split(/[\r\n]+/)};
-	if (this.isActor()) {return this.actor().note.split(/[\r\n]+/)};
+	if (this.isEnemy()) {return this.enemy().note.split(/[\r\n]+/)}
+	if (this.isActor()) {return this.actor().note.split(/[\r\n]+/)}
 };
 
 //=============================================================================
@@ -274,7 +274,7 @@ Game_Battler.prototype.notetags = function() {
 var _mog_hp_gauge_gactor_setup = Game_Actor.prototype.setup;
 Game_Actor.prototype.setup = function(actorId) {
 	_mog_hp_gauge_gactor_setup.call(this,actorId);
-	if (String(Moghunter.hpgauge_actors) === "true") {this._ehpgauge[0] = true};
+	if (String(Moghunter.hpgauge_actors) === "true") {this._ehpgauge[0] = true}
 	this.checkHPGaugeNotes();
 };
 
@@ -288,7 +288,7 @@ Game_Actor.prototype.setup = function(actorId) {
 var _mog_hpgauge_genemy_setup = Game_Enemy.prototype.setup;
 Game_Enemy.prototype.setup = function(enemyId, x, y) {
 	_mog_hpgauge_genemy_setup.call(this,enemyId, x, y);
-	if (String(Moghunter.hpgauge_enemies) === "true") {this._ehpgauge[0] = true};
+	if (String(Moghunter.hpgauge_enemies) === "true") {this._ehpgauge[0] = true}
 	this.checkHPGaugeNotes();
 };
 
@@ -308,9 +308,9 @@ Game_Action.prototype.apply = function(target) {
 		 } else if (this.item() && this.item().damage.type === 5) {
 			 target._ehpgauge[4] = true;
 			 var subj = this.subject();
-			 if (subj) {subj._ehpgauge[4] = true};
-		 };
-	  };
+			 if (subj) {subj._ehpgauge[4] = true}
+		 }
+	  }
 };
 
 //=============================================================================
@@ -357,32 +357,32 @@ Spriteset_Battle.prototype.createHPSprites = function() {
 // * create H PSprites Actor
 //==============================
 Spriteset_Battle.prototype.createHPSpritesActor = function() {
-	if (String(Moghunter.hpgauge_actors) != "true") {return};
+	if (String(Moghunter.hpgauge_actors) != "true") {return}
 	for (var i = 0; i < this._actorSprites.length; i++) {
 		 this._HPSprites[i] = new HPGaugeSprite(this._actorSprites[i],0);
 		 this._hpField.addChild(this._HPSprites[i]);	
-	};
+	}
 };
 
 //==============================
 // * create H PSprites Enemy
 //==============================
 Spriteset_Battle.prototype.createHPSpritesEnemy = function() {
-	if (String(Moghunter.hpgauge_enemies) != "true") {return};
+	if (String(Moghunter.hpgauge_enemies) != "true") {return}
 	for (var i = 0; i < this._enemySprites.length; i++) {
 		 this._HPSprites[i] = new HPGaugeSprite(this._enemySprites[i],1);
 		 this._hpField.addChild(this._HPSprites[i]);
-	};
+	}
 };
 
 //==============================
 // * remove HP Sprites
 //==============================
 Spriteset_Battle.prototype.removeHPSprites = function() {
-	if (!this._HPSprites) {return};
+	if (!this._HPSprites) {return}
 	for (var i = 0; i < this._HPSprites.length; i++) {
 		 this._hpField.removeChild(this._HPSprites[i]);	
-	};
+	}
 };
 
 //=============================================================================
@@ -390,7 +390,7 @@ Spriteset_Battle.prototype.removeHPSprites = function() {
 //=============================================================================
 function HPGaugeSprite() {
     this.initialize.apply(this, arguments);
-};
+}
 
 HPGaugeSprite.prototype = Object.create(Sprite.prototype);
 HPGaugeSprite.prototype.constructor = HPGaugeSprite;
@@ -414,9 +414,9 @@ HPGaugeSprite.prototype.initialize = function(sprite,type) {
     	this._showHPNumber = String(Moghunter.hpgauge_showNumberActor) === "true" ? true : false;
 	} else {
 	    this._showHPNumber = String(Moghunter.hpgauge_showNumberEnemy) === "true" ? true : false;
-	};
+	}
 	this._IDA = type === 0 ? true : this.enemyIDA();
-	if (type === 1 && String(Moghunter.hpgauge_NumberAfter) != "true") {this._IDA = true};
+	if (type === 1 && String(Moghunter.hpgauge_NumberAfter) != "true") {this._IDA = true}
 	this._data = [0,0,0,0,0];
 	this.loadBitmaps();
 };
@@ -440,7 +440,7 @@ HPGaugeSprite.prototype.loadBitmaps = function() {
         this._layImg = ImageManager.loadSystem("HPGaugeEnemy_A");
 	    this._meterImg = ImageManager.loadSystem("HPGaugeEnemy_B");	
 		this._numberImg = ImageManager.loadSystem("HPGaugeEnemy_C");	
-	};
+	}
 };
 
 //==============================
@@ -449,7 +449,7 @@ HPGaugeSprite.prototype.loadBitmaps = function() {
 HPGaugeSprite.prototype.createSprites = function() {
 	this.createLayout();
 	this.createMeter();
-	if (this._showHPNumber) {this.createNumber()};
+	if (this._showHPNumber) {this.createNumber()}
 };
 
 //==============================
@@ -463,7 +463,7 @@ HPGaugeSprite.prototype.createLayout = function() {
 	} else {
 	    this._layout.x = Moghunter.hpgauge_a_x - this._layImg.width / 2;
 	    this._layout.y = Moghunter.hpgauge_a_y - this._layImg.height / 2;
-	};
+	}
 	this.addChild(this._layout);
 };
 
@@ -485,9 +485,9 @@ HPGaugeSprite.prototype.createMeter = function() {
 		} else {
 		    this._meter[i].x = Moghunter.hpgauge_a_x + Moghunter.hpgauge_b_x - this._meterImg.width / 2;
 		    this._meter[i].y = Moghunter.hpgauge_a_y + Moghunter.hpgauge_b_y - this._meterImg.height / 2;
-	    };
+	    }
 		this.addChild(this._meter[i]);
-	};
+	}
     this.refreshMeter(this._meter[0],this._meter[0].value1,this.battler().mhp,1);
 	this.refreshMeter(this._meter[1],this.battler().hp,this.battler().mhp,0);	
 	this.updateMeter();
@@ -497,9 +497,9 @@ HPGaugeSprite.prototype.createMeter = function() {
 // * Need Refresh Blue Meter
 //==============================
 HPGaugeSprite.prototype.needRefreshBlueMeter = function() {
-	if (this.battler()._ehpgauge[4]) {return true};
-    if (this._meter[1].value1 != this.battler().hp) {return true};
-	if (this._meter[1].value2 != this.battler().mhp) {return true};
+	if (this.battler()._ehpgauge[4]) {return true}
+    if (this._meter[1].value1 != this.battler().hp) {return true}
+	if (this._meter[1].value2 != this.battler().mhp) {return true}
 	return false
 };
 
@@ -510,7 +510,7 @@ HPGaugeSprite.prototype.refreshBlueMeter = function() {
 	 this.battler()._ehpgauge[4] = false;
      this._meter[1].value1 = this.battler().hp;
 	 this._meter[1].value2 = this.battler().mhp;
-	 if (!$gameTemp._hpGauge[0]) {return};
+	 if (!$gameTemp._hpGauge[0]) {return}
 	 this.refreshMeter(this._meter[0],this._meter[0].value1,this.battler().mhp,1);
 	 this.refreshMeter(this._meter[1],this.battler().hp,this.battler().mhp,0);
 	 this.prepareSlide();
@@ -523,7 +523,7 @@ HPGaugeSprite.prototype.prepareSlide = function() {
 	if (this.opacity < 100 || this._slideX > 0) {
 	    this._slideX = this._slideA ? -50 : -0.01;
 	    this.opacity = 0;
-	};
+	}
 	this._duration = Math.min(Math.max(Moghunter.hpgauge_duration,1),999);
 };
 
@@ -531,26 +531,26 @@ HPGaugeSprite.prototype.prepareSlide = function() {
 // * Update Dif
 //==============================
 HPGaugeSprite.prototype.update_dif = function(value,real_value,speed,type) {
-	if (value == real_value) {return value};
+	if (value == real_value) {return value}
 	var mr = type === 0 ? 1 : 0.1; 
     var dnspeed = mr + (Math.abs(value - real_value) / speed);
 	if (value > real_value) {value -= dnspeed;
-	    if (value < real_value) {value = real_value};
+	    if (value < real_value) {value = real_value}
 	} else if (value < real_value) {value  += dnspeed;
-    	if (value  > real_value) {value  = real_value};		
-    };
+    	if (value  > real_value) {value  = real_value}		
+    }
 	if (type === 0) {
 	    return Math.floor(value);
 	} else {
 		return value;
-	};
+	}
 };
 
 //==============================
 // * Need Refresh Red Meter
 //==============================
 HPGaugeSprite.prototype.needRefreshRedMeter = function() {
-     if (this._meter[0].value1 != this.battler().hp) {return true};
+     if (this._meter[0].value1 != this.battler().hp) {return true}
 	 return false;
 };
 
@@ -566,8 +566,8 @@ HPGaugeSprite.prototype.refreshRedMeter = function() {
 // * Update Meter
 //==============================
 HPGaugeSprite.prototype.updateMeter = function() {
-	 if (this.needRefreshRedMeter()) {this.refreshRedMeter()};
-	 if (this.needRefreshBlueMeter()) {this.refreshBlueMeter()};
+	 if (this.needRefreshRedMeter()) {this.refreshRedMeter()}
+	 if (this.needRefreshBlueMeter()) {this.refreshBlueMeter()}
 };
 
 //==============================
@@ -593,24 +593,24 @@ HPGaugeSprite.prototype.createNumber = function() {
 		 } else {
 		     this._hp_number[i].x = Moghunter.hpgauge_a_x + Moghunter.hpgauge_c_x;
 		     this._hp_number[i].y = Moghunter.hpgauge_a_y + Moghunter.hpgauge_c_y;
-		 };
+		 }
 		 this._hp_number[i].org = [this._hp_number[i].x,this._hp_number[i].y];
 		 this.addChild(this._hp_number[i]);		 
-	};
+	}
 };
 
 //==============================
 // * update Number
 //==============================
 HPGaugeSprite.prototype.updateNumber = function() {
-	if (this._numberData[0] != this.battler().hp) {this.refreshNumber()};
+	if (this._numberData[0] != this.battler().hp) {this.refreshNumber()}
 };
 
 //==============================
 // * enemy IDA
 //==============================
 HPGaugeSprite.prototype.enemyIDA = function() {
-	 if (this.battler().isActor()) {return true};
+	 if (this.battler().isActor()) {return true}
      return $gameSystem._hpGaugeEDef[this.battler()._enemyId];
 };
 
@@ -637,30 +637,30 @@ HPGaugeSprite.prototype.refreshNumber = function() {
 			   this._hp_number[i].setFrame(n * w, 0, w, h);
 			   this._hp_number[i].visible = true;	   
 			   this._hp_number[i].x = this._hp_number[i].org[0] + (w * i);
-		   };
+		   }
 	   } else {
 		   if (i === 0) {
 			   this._hp_number[0].setFrame(10 * w, 0, w, h);
 			   this._hp_number[0].visible = true;	   
 			   this._hp_number[0].x = this._hp_number[0].org[0] + (w * 2);			     
-		   };
-	   };
-    };	
+		   }
+	   }
+    }	
 };
 
 //==============================
 // * Is Visible
 //==============================
 HPGaugeSprite.prototype.isVisible = function() {
-	if (!this.battler()) {return false};
-	if (this.battler().isHidden()) {return false};
-    if (!this.battler()._ehpgauge[0]) {return false};
+	if (!this.battler()) {return false}
+	if (this.battler().isHidden()) {return false}
+    if (!this.battler()._ehpgauge[0]) {return false}
 	if (Imported.MOG_BossHP) { 
-	    if (this.battler()._bosshp_meter) {return false};
-	};
+	    if (this.battler()._bosshp_meter) {return false}
+	}
 	if (this.type === 0 && !$gameSystem.isSideView()) {
 		return false;
-	};
+	}
 	return true;
 };
 
@@ -668,8 +668,8 @@ HPGaugeSprite.prototype.isVisible = function() {
 // * force Visible
 //==============================
 HPGaugeSprite.prototype.forceVisible = function() {
-     if (this.battler()._ehpgauge[3]) {return true};
-	 if (this._selectionHP && this.battler().isSelected() && !this.battler().isDead()) {return true};
+     if (this.battler()._ehpgauge[3]) {return true}
+	 if (this._selectionHP && this.battler().isSelected() && !this.battler().isDead()) {return true}
 	 return false;
 };
 
@@ -697,14 +697,14 @@ HPGaugeSprite.prototype.updateSlide = function() {
 	if (this._slideX >= 0) {
 		this._slideX = 0;
 		this.opacity = 255;
-	};
+	}
 };
 
 //==============================
 // * Update Fade
 //==============================
 HPGaugeSprite.prototype.updateFade = function() {
-	if (this._slideA) {this._slideX += 2};
+	if (this._slideA) {this._slideX += 2}
 	this.opacity -= 10;
 };
 
@@ -712,9 +712,9 @@ HPGaugeSprite.prototype.updateFade = function() {
 // * Update Slide
 //==============================
 HPGaugeSprite.prototype.updateAnimation = function() {
-    if (this._slideX < 0) {this.updateSlide();return};
-	if (this._duration > 0) {this._duration--;return};
-	if (this.opacity > 0) {this.updateFade()};	
+    if (this._slideX < 0) {this.updateSlide();return}
+	if (this._duration > 0) {this._duration--;return}
+	if (this.opacity > 0) {this.updateFade()}	
 };
 
 //==============================
@@ -734,10 +734,10 @@ HPGaugeSprite.prototype.updatePosition = function() {
        this.updateForceVisible();
    } else {
 	   this.updateAnimation();
-   };
+   }
    this.x = this.posX();
    this.y = this.posY();
-   if (Imported.MOG_BattlerMotion) {this.x -= Math.abs(this._sprite._battler._bmotion.damage.x)};
+   if (Imported.MOG_BattlerMotion) {this.x -= Math.abs(this._sprite._battler._bmotion.damage.x)}
 };
 
 //==============================
@@ -746,9 +746,9 @@ HPGaugeSprite.prototype.updatePosition = function() {
 HPGaugeSprite.prototype.update = function() {
     Sprite.prototype.update.call(this);
 	this.visible = this.isVisible();
-	if (!this.battler()) {return};
-	if (!this._layout && this._meterImg.isReady()) {this.createSprites()};
-	if (this._meter) {this.updateMeter()};
-	if (this._hp_number) {this.updateNumber()};
+	if (!this.battler()) {return}
+	if (!this._layout && this._meterImg.isReady()) {this.createSprites()}
+	if (this._meter) {this.updateMeter()}
+	if (this._hp_number) {this.updateNumber()}
     this.updatePosition();
 };

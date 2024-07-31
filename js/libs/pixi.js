@@ -2013,7 +2013,7 @@ var PIXI = (function (exports) {
 
 	var punycode = createCommonjsModule(function (module, exports) {
 	/*! https://mths.be/punycode v1.3.2 by @mathias */
-	;(function(root) {
+	(function(root) {
 
 		/** Detect free variables */
 		var freeExports = 'object' == 'object' && exports &&
@@ -3237,7 +3237,7 @@ var PIXI = (function (exports) {
 	    result.protocol = relative.protocol;
 	    if (!relative.host && !hostlessProtocol[relative.protocol]) {
 	      var relPath = (relative.pathname || '').split('/');
-	      while (relPath.length && !(relative.host = relPath.shift())){ ; }
+	      while (relPath.length && !(relative.host = relPath.shift())){  }
 	      if (!relative.host) { relative.host = ''; }
 	      if (!relative.hostname) { relative.hostname = ''; }
 	      if (relPath[0] !== '') { relPath.unshift(''); }
@@ -21358,7 +21358,7 @@ var PIXI = (function (exports) {
 	        }
 	        var renderer = this.renderer;
 	        this.initTextureType(texture, glTexture);
-	        if (texture.resource && texture.resource.upload(renderer, texture, glTexture)) { ; }
+	        if (texture.resource && texture.resource.upload(renderer, texture, glTexture)) {  }
 	        else {
 	            // default, renderTexture-like logic
 	            var width = texture.realWidth;
@@ -21424,7 +21424,7 @@ var PIXI = (function (exports) {
 	        else {
 	            glTexture.wrapMode = texture.wrapMode;
 	        }
-	        if (texture.resource && texture.resource.style(this.renderer, texture, glTexture)) { ; }
+	        if (texture.resource && texture.resource.style(this.renderer, texture, glTexture)) {  }
 	        else {
 	            this.setStyle(texture, glTexture);
 	        }
@@ -28067,7 +28067,7 @@ var PIXI = (function (exports) {
 	         {
 	            verts.push(x1 - (perpx * innerWeight), y1 - (perpy * innerWeight)); // first segment's inner vertex
 	            verts.push(x1 + (perpx * outerWeight), y1 + (perpy * outerWeight)); // first segment's outer vertex
-	            if (style.join === exports.LINE_JOIN.BEVEL || pdist / widthSquared > miterLimitSquared) { ; }
+	            if (style.join === exports.LINE_JOIN.BEVEL || pdist / widthSquared > miterLimitSquared) {  }
 	            else if (style.join === exports.LINE_JOIN.ROUND) {
 	                if (clockwise) /* arc is outside */ {
 	                    indexCount += round(x1, y1, x1 + (perpx * outerWeight), y1 + (perpy * outerWeight), x1 + (perp1x * outerWeight), y1 + (perp1y * outerWeight), verts, true) + 2;
@@ -30054,7 +30054,7 @@ var PIXI = (function (exports) {
 	            // We check how far our start is from the last existing point
 	            var xDiff = Math.abs(points[points.length - 2] - startX);
 	            var yDiff = Math.abs(points[points.length - 1] - startY);
-	            if (xDiff < eps && yDiff < eps) { ; }
+	            if (xDiff < eps && yDiff < eps) {  }
 	            else {
 	                points.push(startX, startY);
 	            }
@@ -39372,7 +39372,7 @@ var PIXI = (function (exports) {
 	function __makeTemplateObject(cooked, raw) {
 	    if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
 	    return cooked;
-	};
+	}
 
 	function __importStar(mod) {
 	    if (mod && mod.__esModule) { return mod; }

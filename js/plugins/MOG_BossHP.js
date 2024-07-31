@@ -257,7 +257,7 @@ Game_System.prototype.initialize = function() {
 Game_System.prototype.checkBossHpEnemies = function() {
 	var boss = null;
 	$gameTroop.members().forEach(function(enemy) {
-		if (enemy._bosshp_meter) {boss = enemy};
+		if (enemy._bosshp_meter) {boss = enemy}
 	},this);
 	return boss;
 };
@@ -301,8 +301,8 @@ BattleManager.processDefeat = function() {
 // * Notetags
 //==============================
 Game_Battler.prototype.notetags = function() {
-	if (this.isEnemy()) {return this.enemy().note.split(/[\r\n]+/)};
-	if (this.isActor()) {return this.actor().note.split(/[\r\n]+/)};
+	if (this.isEnemy()) {return this.enemy().note.split(/[\r\n]+/)}
+	if (this.isActor()) {return this.actor().note.split(/[\r\n]+/)}
 };
 
 //==============================
@@ -373,8 +373,8 @@ Game_Enemy.prototype.setup = function(enemyId, x, y) {
 //==============================
 Game_Enemy.prototype.checkBossHPnoteTag = function() {
 	for (var i = 0; i < this.notetags().length; i++) {
-		if (this.notetags()[i] == "Boss HP") {this._bosshp_meter = true};
-	};	
+		if (this.notetags()[i] == "Boss HP") {this._bosshp_meter = true}
+	}	
 };
 
 //==============================
@@ -399,12 +399,12 @@ Game_Action.prototype.apply = function(target) {
 	 if (target.isEnemy() && target._bosshp_meter) {
 		 $gameTemp._battler_bhp_temp[1] = target.hp;
 	     var old_hp = target.hp; $gameTemp._battler_bhp_temp[3] = 0;
-	 };
+	 }
 	 _alias_mog_bosshp_apply.call(this,target);
 	 if (target.isEnemy() && target._bosshp_meter) {
 		 $gameTemp._battler_bhp_temp[0] = target;
-	     if (old_hp > target.hp) {$gameTemp._battler_bhp_temp[3] = 60};
-	 };
+	     if (old_hp > target.hp) {$gameTemp._battler_bhp_temp[3] = 60}
+	 }
 };
 
 //=============================================================================
@@ -440,8 +440,8 @@ Scene_Base.prototype.createBossHPGauge = function() {
 			 this._bosshp_sprites = new Sprite_BossHP(init_battler);
 			 this._bosshp_sprites.z = 130;
 			 this._hudField.addChild(this._bosshp_sprites);
-		};
-	};
+		}
+	}
 	this.sortMz();
 };
 
@@ -450,7 +450,7 @@ Scene_Base.prototype.createBossHPGauge = function() {
 //==============================
 Scene_Base.prototype.removeBossHPGauge = function() {
 	$gameTemp._battler_bhp_remove = false;
-	if (!this._bosshp_sprites) {return};
+	if (!this._bosshp_sprites) {return}
 	this._hudField.removeChild(this._bosshp_sprites);
     this._bosshp_sprites = null;
 };
@@ -465,7 +465,7 @@ Scene_Base.prototype.removeBossHPGauge = function() {
 var _mog_bossHP_sbattle_createSpriteset = Scene_Battle.prototype.createSpriteset;
 Scene_Battle.prototype.createSpriteset = function() {
 	_mog_bossHP_sbattle_createSpriteset.call(this);
-	if (!this._hudField) {this.createHudField()};
+	if (!this._hudField) {this.createHudField()}
     this.createBossHPGauge();
 	this.sortMz();	
 };
@@ -476,7 +476,7 @@ Scene_Battle.prototype.createSpriteset = function() {
 var _mog_bossHP_sbattle_update = Scene_Battle.prototype.update;
 Scene_Battle.prototype.update = function() {
 	_mog_bossHP_sbattle_update.call(this);
-    if ($gameTemp._forceCreateBossHud) {this.recreateBossHP()};
+    if ($gameTemp._forceCreateBossHud) {this.recreateBossHP()}
 };
 
 //==============================
@@ -512,8 +512,8 @@ Sprite_BossHP.prototype.initialize = function(init_battler) {
 	this._xf = -(816 - Graphics.width);
 	this._yf = 0;	
     this.createSprites();
-	if (String(Moghunter.bosshp_shake_effect) === "true") {this._hp_data[11] = true};
-	if (String($gameSystem._bosshp_data[2]) != "true") {this._hp_data[12] = false};
+	if (String(Moghunter.bosshp_shake_effect) === "true") {this._hp_data[11] = true}
+	if (String($gameSystem._bosshp_data[2]) != "true") {this._hp_data[12] = false}
 };
 
 //==============================
@@ -524,9 +524,9 @@ Sprite_BossHP.prototype.createSprites = function() {
 	this.y = this._hp_data[10] + this._yf;
     this.createLayout();
     this.createHPMeter();
-	if (String(Moghunter.bosshp_face) === "true") {this.createFace()};
+	if (String(Moghunter.bosshp_face) === "true") {this.createFace()}
 	this.createHPNumber();
-	if (String(Moghunter.bosshp_states) === "true") {this.createStates()};
+	if (String(Moghunter.bosshp_states) === "true") {this.createStates()}
     this.createName();
 };
 
@@ -561,9 +561,9 @@ Sprite_BossHP.prototype.refreshStates = function() {
 	this._battler._nrsBoss = false;
 	for (i = 0; i < this._stateIcons.length; i++){
 		this._state_icon.removeChild(this._stateIcons[i]);
-	};	
+	}	
 	this._stateIcons = [];
-	if (this._battler.allIcons().length == 0 || this._battler.isDead()) {return};
+	if (this._battler.allIcons().length == 0 || this._battler.isDead()) {return}
 	this._state_icon.visible = true;
 	var w = Window_Base._iconWidth;
 	var icons = this._battler.allIcons().slice(0,w);
@@ -575,14 +575,14 @@ Sprite_BossHP.prototype.refreshStates = function() {
 		 this._stateIcons[i].setFrame(sx, sy, w, w);
 	     this._stateIcons[i].x = ((w + 4) * i);
 		 this._state_icon.addChild(this._stateIcons[i]);
-	};	
+	}	
 };
 
 //==============================
 // * Update States
 //==============================
 Sprite_BossHP.prototype.updateStates = function() {
-	if (this._battler._nrsBoss) {this.refreshStates()};
+	if (this._battler._nrsBoss) {this.refreshStates()}
 };
 	
 //==============================
@@ -643,8 +643,8 @@ Sprite_BossHP.prototype.createHPNumber = function() {
 		 this._hp_number[i].y = Moghunter.bosshp_number_y;
 		 this._hp_number_data[i] = 0;
 		 this.addChild(this._hp_number[i]);		 
-	};
-	if (this._hp_perMode) {this.createPerc()};
+	}
+	if (this._hp_perMode) {this.createPerc()}
 };
 
 //==============================
@@ -691,24 +691,24 @@ Sprite_BossHP.prototype.update = function() {
 			this.getSpriteData();
 		} else {
 			return
-		};
-    };
-	if (this._flowAnimation) {this.updateFlowAnimation()};
-	if ($gameTemp._battler_bhp_temp[3] != 0) {this.refreshShake()};
-	if (this.need_fadeSprites()) {this.updateFade(5)} else {this.updateFade(-5)};
-	if ($gameTemp._battler_bhp_temp[0] != this._battler) {this.refresh_all();	};
+		}
+    }
+	if (this._flowAnimation) {this.updateFlowAnimation()}
+	if ($gameTemp._battler_bhp_temp[3] != 0) {this.refreshShake()}
+	if (this.need_fadeSprites()) {this.updateFade(5)} else {this.updateFade(-5)}
+	if ($gameTemp._battler_bhp_temp[0] != this._battler) {this.refresh_all();	}
 	if (this._flowAnimation) {
 	    this.refresh_blue_meter(); 
 	} else if (this._hp_data[0] != this._battler.hp || this._hp_data[1] != this._battler.mhp) {
 		this.refresh_blue_meter();
-	};
-	if (this._hp_data[2] != this._battler.hp) {this.refresh_red_meter();};
-	if (this._hp_data[6] != this._battler.hp) {this.update_hp_number();};
-	if (this._hp_data[11]) {this.update_shake_effect();};
-	if (this._face) {this.updateFace()};
+	}
+	if (this._hp_data[2] != this._battler.hp) {this.refresh_red_meter();}
+	if (this._hp_data[6] != this._battler.hp) {this.update_hp_number();}
+	if (this._hp_data[11]) {this.update_shake_effect();}
+	if (this._face) {this.updateFace()}
 	
-	if (this._state_icon) {this.updateStates()};
-	if ($gameSystem._battler_bhp_refresh3) {this.refreshPluginCommand()};
+	if (this._state_icon) {this.updateStates()}
+	if ($gameSystem._battler_bhp_refresh3) {this.refreshPluginCommand()}
 	$gameSystem._battler_bhp_refresh3 = false;
 	this._init = false;
 };
@@ -725,10 +725,10 @@ Sprite_BossHP.prototype.refreshPluginCommand = function() {
    if (!this._hp_data[12]) {
 	   for (var i = 0; i < this._hp_number.length; i++) {
 			this._hp_number[i].visible = false;
-	   };
+	   }
    } else {
        this.refresh_hp_number();
-   };
+   }
 
 };
 
@@ -747,41 +747,41 @@ Sprite_BossHP.prototype.updateFlowAnimation = function() {
     this._hp_meter_blueFlow[3] += Moghunter.bosshp_flowAnimationSpeed;
 	if (this._hp_meter_blueFlow[3] > this._hp_meter_blueFlow[2]) {
 		this._hp_meter_blueFlow[3] = 0;
-	};
+	}
     this._hp_meter_redFlow[3] += Moghunter.bosshp_flowAnimationSpeed;
 	if (this._hp_meter_redFlow[3] > this._hp_meter_redFlow[2]) {
 		this._hp_meter_redFlow[3] = 0;
-	};	
+	}	
 };
 
 //==============================
 // * Update Shake Effect
 //==============================
 Sprite_BossHP.prototype.update_shake_effect = function() {
-    if (this._hp_data[7] <= 0) {return;};
+    if (this._hp_data[7] <= 0) {return;}
 	this._hp_data[7] -= 1;
 	this.y = -3 + this._hp_data[10] + Math.floor(Math.random() * 6) + this._yf;
-	if (this._hp_data[7] <= 0) {this.y = this._hp_data[10] + this._yf};
+	if (this._hp_data[7] <= 0) {this.y = this._hp_data[10] + this._yf}
 };
 
 //==============================
 // * Update HP Number
 //==============================
 Sprite_BossHP.prototype.update_hp_number = function() {
-	  if (!this._hp_data[12]) {return};
+	  if (!this._hp_data[12]) {return}
 	  if (this._init && $gameSystem._battler_bhp_oldNumber[1] != 0) {
 		  this._hp_data[6] = $gameSystem._battler_bhp_oldNumber[1];
 		  $gameSystem._battler_bhp_oldNumber[1] = 0;
-	  };	  
+	  }	  
       var nspd = 1 + Math.floor((Math.abs(this._hp_data[6] - this._battler.hp) / 30))
       if (this._hp_data[6] < this._battler.hp) {
 		  this._hp_data[6] += nspd;
-		  if (this._hp_data[6] > this._battler.hp) {this._hp_data[6] = this._battler.hp};
+		  if (this._hp_data[6] > this._battler.hp) {this._hp_data[6] = this._battler.hp}
 	  }
 	  else if (this._hp_data[6] > this._battler.hp) {
 		  this._hp_data[6] -= nspd;
-		  if (this._hp_data[6] < this._battler.hp) {this._hp_data[6] = this._battler.hp};
-	  };
+		  if (this._hp_data[6] < this._battler.hp) {this._hp_data[6] = this._battler.hp}
+	  }
 	  this.refresh_hp_number();
 };
 	  
@@ -795,22 +795,22 @@ Sprite_BossHP.prototype.refresh_hp_number = function() {
        var value = Math.floor((this._hp_data[6] / this._battler.mhp) * 100);
    } else {
        var value = this._hp_data[6];
-   };
+   }
    this._hp_data[4] = Math.abs(value).toString().split("");  
-   if (this._hp_data[4].length > this._hp_number.length) {return};
+   if (this._hp_data[4].length > this._hp_number.length) {return}
    if (this._hp_data[4].length != this._hp_data[5]) {
-	   for (var i = 0; i < 6; i++) {this._hp_number[i].visible = false};this._hp_data[5] = this._hp_data[4].length};
+	   for (var i = 0; i < 6; i++) {this._hp_number[i].visible = false}this._hp_data[5] = this._hp_data[4].length}
    for (var i = 0; i < this._hp_data[4].length; i++) {
 	   var n = Number(this._hp_data[4][i]);
 	   this._hp_number[i].setFrame(n * w, 0, w, h);
 	   this._hp_number[i].visible = true;	   
 	   var nx = -(w * i) + (w * this._hp_data[4].length)
 	   this._hp_number[i].x = Moghunter.bosshp_number_x - nx;
-   };
+   }
    if (this._perSprite) {
 		this._perSprite.x = Moghunter.bosshp_number_x + 4;
 		this._perSprite.y = Moghunter.bosshp_number_y;
-   };   
+   }   
 };
 
 //==============================
@@ -825,11 +825,11 @@ Sprite_BossHP.prototype.refresh_name = function() {
 // * Need Fade Sprites
 //==============================
 Sprite_BossHP.prototype.need_fadeSprites = function() {
-	if ($gameMessage.isBusy()) {return true} ;	
-	if ($gameTemp._battler_bhp_temp[2]) {return true} ;
-	if (!this._battler) {return true} ;
-	if (this._battler.isDead()) {return true};
-	if (this._battler.isHidden()) {return true};
+	if ($gameMessage.isBusy()) {return true} 	
+	if ($gameTemp._battler_bhp_temp[2]) {return true} 
+	if (!this._battler) {return true} 
+	if (this._battler.isDead()) {return true}
+	if (this._battler.isHidden()) {return true}
 	return false;
 };
 
@@ -851,8 +851,8 @@ Sprite_BossHP.prototype.refresh_all = function() {
 	 this.refresh_blue_meter();
 	 this.refresh_red_meter();
 	 this.refresh_name();
-	 if (this._face) {this.refreshFace()};
-	 if (this._state_icon) {this.refreshStates()};
+	 if (this._face) {this.refreshFace()}
+	 if (this._state_icon) {this.refreshStates()}
 };
 
 //==============================
@@ -876,14 +876,14 @@ Sprite_BossHP.prototype.refresh_red_meter = function() {
 		      $gameSystem._battler_bhp_oldNumber[0] = 0;
 		  } else {
 			this._hp_data[2] = this._battler.mhp;			
-		  };
-	 };		
+		  }
+	 }		
 	  var dnspeed = 1 + (Math.abs(this._hp_data[2] - this._battler.hp) / 160);
 	  if (this._hp_data[2] > this._battler.hp) {this._hp_data[2] -= dnspeed;
-		  if (this._hp_data[2] < this._battler.hp) {this._hp_data[2] = this._battler.hp};}
+		  if (this._hp_data[2] < this._battler.hp) {this._hp_data[2] = this._battler.hp}}
 	  else if (this._hp_data[2] < this._battler.hp) {this._hp_data[2]  += dnspeed;
-		  if (this._hp_data[2]  > this._battler.hp) {this._hp_data[2]  = this._battler.hp};			
-	  };
+		  if (this._hp_data[2]  > this._battler.hp) {this._hp_data[2]  = this._battler.hp}			
+	  }
 	 var meter_rate = this._hp_meter_redFlow[0] * this._hp_data[2] / this._battler.mhp;
 	 this._hp_meter_red.setFrame(this._hp_meter_redFlow[3], this._hp_meter_red.bitmap.height / 2, meter_rate, this._hp_meter_red.bitmap.height / 2);	
 };

@@ -203,7 +203,7 @@
 	Moghunter.title_com_pos = [];
 	for (var i = 0; i < 10; i++) {
 		Moghunter.title_com_pos[i] = (Moghunter.parameters['Command Pos ' + String(i + 1)] || null);
-	};	
+	}	
 
 //=============================================================================
 // ■■■ Scene Title  ■■■
@@ -224,10 +224,10 @@ Scene_Title.prototype.create = function() {
 var _mog_titleCom_createCommandWindow = Scene_Title.prototype.createCommandWindow;
 Scene_Title.prototype.createCommandWindow = function() {
 	_mog_titleCom_createCommandWindow.call(this);
-	if (!this._titleField3) {this.createTitleField3()};
+	if (!this._titleField3) {this.createTitleField3()}
 	this.createTitlePictureCommands();
 	this._sideInput = String(Moghunter.title_sideInput) == "true" ? true : false;
-	if (String(Moghunter.title_cursorVisible) == "true") {this.createCursorCommand()};
+	if (String(Moghunter.title_cursorVisible) == "true") {this.createCursorCommand()}
 };
 
 //================================
@@ -260,7 +260,7 @@ Scene_Title.prototype.createTitlePictureCommands = function() {
 		 this._TpictureCom[i] = new TpictureCom(this._commandWindow,i);
 		 this._TpictureCom[i].z = 300;
 		 this._titleField3.addChild(this._TpictureCom[i]);
-	};
+	}
  	this._commandWindow.x = -(Graphics.width * 2);	
 };
 
@@ -269,7 +269,7 @@ Scene_Title.prototype.createTitlePictureCommands = function() {
 //==============================
 Scene_Title.prototype.createCursorCommand = function() {
 	this._cursorSlide = [0,0,0,false];
-	if (String(Moghunter.title_cursorSlide) == "true") {this._cursorSlide[3] = true};
+	if (String(Moghunter.title_cursorSlide) == "true") {this._cursorSlide[3] = true}
     this._cursor = new Sprite(ImageManager.loadTitle2("Cursor"));
 	this._cursor.anchor.x = 0.5;
 	this._cursor.anchor.y = 0.5;
@@ -287,8 +287,8 @@ Scene_Title.prototype.createCursorCommand = function() {
 // * update Title Cursor
 //==============================
 Scene_Title.prototype.updateTitleCursor = function() {
-	 if (this._cursorSlide[3]) {this.updateCursorSlide()};
-	 if (this._cursor.rot[0]) {this.updateCursorRotation()}; 
+	 if (this._cursorSlide[3]) {this.updateCursorSlide()}
+	 if (this._cursor.rot[0]) {this.updateCursorRotation()} 
    	 this._cursor.opacity += 5;
  	 var nx = this.comSprite().x - (this.comSprite().bitmap.width / 2) - (this._cursor.width / 2) + this._cursorSlide[0];
 	 var ny = this.comSprite().y - (this.comSprite().bitmap.height / 2) + (this._cursor.height / 2) + this._cursor.org[1];
@@ -315,7 +315,7 @@ Scene_Title.prototype.updateCursorRotation = function() {
 //==============================
 Scene_Title.prototype.updateCursorSlide = function() {
      this._cursorSlide[1] ++
-	 if (this._cursorSlide[1] < 3) {return};
+	 if (this._cursorSlide[1] < 3) {return}
 	 this._cursorSlide[1] = 0
 	 this._cursorSlide[2] ++
 	 if (this._cursorSlide[2] < 15) {
@@ -325,20 +325,20 @@ Scene_Title.prototype.updateCursorSlide = function() {
 	 } else {
 		 this._cursorSlide[0] = 0;
 		 this._cursorSlide[2] = 0;
-	 };
+	 }
 };
 
 //==============================
 // * Sprite Move To
 //==============================
 Scene_Title.prototype.cursorMoveto = function(value,real_value,speed) {
-	if (value == real_value) {return value};
+	if (value == real_value) {return value}
 	var dnspeed = 5 + (Math.abs(value - real_value) / speed);
 	if (value > real_value) {value -= dnspeed;
-	    if (value < real_value) {value = real_value};}
+	    if (value < real_value) {value = real_value}}
     else if (value < real_value) {value  += dnspeed;
-    	if (value  > real_value) {value  = real_value};		
-    };
+    	if (value  > real_value) {value  = real_value}		
+    }
 	return Math.floor(value);
 };
 
@@ -353,18 +353,18 @@ Scene_Title.prototype.checkTPicCom = function() {
 			      this._commandWindow.processOk();
 			 } else {
 				  this._commandWindow.playCursorSound()
-			 };
+			 }
 			 this._picComIndex = this._commandWindow._index 
-		 };
-	};
+		 }
+	}
 };
 
 //==============================
 // * picComNeedCheckTouch
 //==============================
 Scene_Title.prototype.picComNeedCheckTouch = function() {
-   if (this._tComTouch[0] != TouchInput.x) {return true};
-   if (this._tComTouch[1] != TouchInput.y) {return true}; 
+   if (this._tComTouch[0] != TouchInput.x) {return true}
+   if (this._tComTouch[1] != TouchInput.y) {return true} 
    return false;
 };
 
@@ -372,8 +372,8 @@ Scene_Title.prototype.picComNeedCheckTouch = function() {
 // * update Title Touch Input Com
 //==============================
 Scene_Title.prototype.updateTitleTouchInputCom = function() {
-    if (TouchInput.isTriggered()) {this.checkTPicCom()}; 
-	if (this.picComNeedCheckTouch()) {this.updateTComMouseIsOnPic()};
+    if (TouchInput.isTriggered()) {this.checkTPicCom()} 
+	if (this.picComNeedCheckTouch()) {this.updateTComMouseIsOnPic()}
 	this._tComTouch = [TouchInput.x,TouchInput.y];
 };
 
@@ -385,7 +385,7 @@ Scene_Title.prototype.updateComSideInput = function() {
 		this.addTitleComIndex(1);
 	} else if (Input.isRepeated('left')) {
 		this.addTitleComIndex(-1);
-	};
+	}
 };
 
 //==============================
@@ -398,10 +398,10 @@ Scene_Title.prototype.updateTComMouseIsOnPic = function() {
 			 this._commandWindow._index = i;
 			 if (this._picComIndex != this._commandWindow._index) {			    
 	    		 this._commandWindow.playCursorSound();
-			 };
+			 }
 			 this._picComIndex = this._commandWindow._index ;
-		 };
-	};
+		 }
+	}
 };
 
 //==============================
@@ -415,7 +415,7 @@ Scene_Title.prototype.addTitleComIndex = function(value) {
 		this._commandWindow._index = maxIndex;
 	} else if (this._commandWindow._index > maxIndex) {
 		this._commandWindow._index = 0;
-	};
+	}
 };
 
 //==============================
@@ -424,9 +424,9 @@ Scene_Title.prototype.addTitleComIndex = function(value) {
 Scene_Title.prototype.updatePicCommands = function() {
 	 if (!this._picComE) {
 	     this.updateTitleTouchInputCom();
-	     if (this._sideInput) {this.updateComSideInput()};
-	 };
-	 if (this._cursor) {this.updateTitleCursor()};
+	     if (this._sideInput) {this.updateComSideInput()}
+	 }
+	 if (this._cursor) {this.updateTitleCursor()}
 	 if (!this._picComE && this._commandWindow.isClosing()) {this._picComE = true;}
 };
 
@@ -435,7 +435,7 @@ Scene_Title.prototype.updatePicCommands = function() {
 //=============================================================================
 function TpictureCom() {
     this.initialize.apply(this, arguments);
-};
+}
 
 TpictureCom.prototype = Object.create(Sprite.prototype);
 TpictureCom.prototype.constructor = TpictureCom;
@@ -476,9 +476,9 @@ TpictureCom.prototype.prepareBitmap = function() {
 // * set tcp
 //==============================
 TpictureCom.prototype.set_tcp = function(value) {
-	if (!value) {return null};
+	if (!value) {return null}
 	var s = value.split(',');
-	if (!s[0] || !s[1]) {return null};
+	if (!s[0] || !s[1]) {return null}
 	return  [Number(s[0]),Number(s[1])];
 };
 
@@ -510,10 +510,10 @@ TpictureCom.prototype.getData = function() {
 // * On Picture Com
 //==============================
 TpictureCom.prototype.isOnPicCom = function() {
-    if (TouchInput.x < this._pw1) {return false};
-	if (TouchInput.x > this._pw2) {return false};
-	if (TouchInput.y < this._ph1) {return false};
-	if (TouchInput.y > this._ph2) {return false};
+    if (TouchInput.x < this._pw1) {return false}
+	if (TouchInput.x > this._pw2) {return false}
+	if (TouchInput.y < this._ph1) {return false}
+	if (TouchInput.y > this._ph2) {return false}
 	return true;
 };
 
@@ -528,18 +528,18 @@ TpictureCom.prototype.updateZoomAnimation = function() {
 			if (this.scale.x <= 1.00) {
 				this.scale.x = 1.00;
 				this._aniData.zoomPhase = 1;
-			};
+			}
 		} else {
 			this.scale.x += this._aniData.zoomSpeed;
 			if (this.scale.x >= this._aniData.zoomMax) {
 				this.scale.x = this._aniData.zoomMax;
 				this._aniData.zoomPhase = 0;
-			};		
-	    };
+			}		
+	    }
 	} else {
 		this._aniData.zoomPhase = 0;
-		if (this.scale.x > 1.00) {this.scale.x -= (this._aniData.zoomSpeed * 3)};
-	}; 
+		if (this.scale.x > 1.00) {this.scale.x -= (this._aniData.zoomSpeed * 3)}
+	} 
 	this.scale.y = this.scale.x  
 };
 
@@ -566,13 +566,13 @@ TpictureCom.prototype.updateSlide = function() {
 // * Sprite Move To
 //==============================
 TpictureCom.prototype.cSlide = function(value,real_value,speed) {
-	if (value == real_value) {return value};
+	if (value == real_value) {return value}
 	var dnspeed = 3 + (Math.abs(value - real_value) / speed);
 	if (value > real_value) {value -= dnspeed;
-	    if (value < real_value) {value = real_value};}
+	    if (value < real_value) {value = real_value}}
     else if (value < real_value) {value  += dnspeed;
-    	if (value  > real_value) {value  = real_value};		
-    };
+    	if (value  > real_value) {value  = real_value}		
+    }
 	return Math.floor(value);
 };
 
@@ -596,31 +596,31 @@ TpictureCom.prototype.shakeClear = function() {
 // * update Shake Animation
 //==============================
 TpictureCom.prototype.updateShakeAnimation = function() {
-	if (this._index != this._data._index) {this.shakeClear();return};
+	if (this._index != this._data._index) {this.shakeClear();return}
 	if (this._aniData.shakeD1 > 0) {
 		if (this._aniData.shakeD2 > 0) {
 			this._aniData.shakeD2--;
 		    if (this._aniData.shakeD2 <= 0) {
 			    this._aniData.shakeD2 = 3;
 			    this._aniData.shakeX = -5 + (Math.abs(Math.random() * 10));
-			};
-		};
+			}
+		}
 		this._aniData.shakeD1--;
-	    if (this._aniData.shakeD1 <= 0) {this.shakeClear()};
-	};
+	    if (this._aniData.shakeD1 <= 0) {this.shakeClear()}
+	}
 };
 
 //==============================
 // * update Pic Command
 //==============================
 TpictureCom.prototype.updatePicCommand = function() {
-	if (this._wait > 0) {this._wait--;return};
+	if (this._wait > 0) {this._wait--;return}
     if (this._aniData.mode == 1) {
 		this.updateZoomAnimation()
 	} else if (this._aniData.mode == 2) {
 		this.updateShakeAnimation();
-	};
-	if (this._index2 != this._data._index) {this.setFrameIndex()};
+	}
+	if (this._index2 != this._data._index) {this.setFrameIndex()}
 	this.updateSlide();
 	this.updateOpacity();
 };
@@ -631,8 +631,8 @@ TpictureCom.prototype.updatePicCommand = function() {
 TpictureCom.prototype.update = function() {
     Sprite.prototype.update.call(this);
 	if (!this._cw) {
-	    if (this.bitmap.isReady()) {this.getData()};
+	    if (this.bitmap.isReady()) {this.getData()}
 	} else {
 		this.updatePicCommand();
-    };
+    }
 };
